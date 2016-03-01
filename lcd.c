@@ -67,6 +67,7 @@ void lcd_init(void)
 	//Delay 40msec after power applied
 
 	lcd_command(0x03);
+	//TODO: wait_ms(5)
 
 
 
@@ -74,22 +75,43 @@ void lcd_init(void)
 }
 
 ///Toggle Enable pin and clear data on port
-void lcd_toggle_clear(char delay)
+void lcd_sendChar(char data)
 {
+	//Send Data
+	LCD_PORT_DATA |= RS_PIN;
+	LCD_PORTA_DATA &= ~(RW_PIN | EN_PIN);
+
+	//Send High nibble
+	lcd_sendNibble(data >> 4);
+
+	//Send Lower Nibble
+	lcd_sendNibble(data & 0x0F);
+
+
+}
+
+///Send 4bit nibble to lcd
+void lcd_sendNibble(uint8_t theNibble)
+{
+
+	LCD_PORT_DATA |= theNibble;
+
 
 }
 
 
 ///Send Command to LCD Controller
-void lcd_command(uint8_t data)
+void lcd_command(char data)
 {
-	LCD_PORT_DATA |= (data | 0x0F); //Lower Nibble
-	LCD_PORT_DATA &= ~(RW_PIN | RS_PIN);
+	LCD_PORT_DATA |= (data & 0x0F); //Lower Nibble
+	LCD_PORT_DATA &= ~(RW_PIN | RS_PIN); // Write Command
 
 	//Enable High
 	LCD_PORT_DATA |= EN_PIN;
 
-	//Delay 1us
+	//TODO: wait_ms(1);
+	for(int i = 0; i < 100; i++);
+
 	LCD_PORT_DATA &= ~(EN_PIN);
 
 
