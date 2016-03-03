@@ -13,6 +13,7 @@ ORDERED_OBJS += \
 "./lcd.obj" \
 "./main.obj" \
 "./tm4c123gh6pm_startup_ccs.obj" \
+"./uartConfig.obj" \
 "./util.obj" \
 "../tm4c123gh6pm.cmd" \
 $(GEN_CMDS__FLAG) \
@@ -152,8 +153,8 @@ Lab1.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(EXE_OUTPUTS__QUOTED)$(BIN_OUTPUTS__QUOTED)
-	-$(RM) "lcd.pp" "main.pp" "tm4c123gh6pm_startup_ccs.pp" "util.pp" 
-	-$(RM) "lcd.obj" "main.obj" "tm4c123gh6pm_startup_ccs.obj" "util.obj" 
+	-$(RM) "lcd.pp" "main.pp" "tm4c123gh6pm_startup_ccs.pp" "uartConfig.pp" "util.pp" 
+	-$(RM) "lcd.obj" "main.obj" "tm4c123gh6pm_startup_ccs.obj" "uartConfig.obj" "util.obj" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

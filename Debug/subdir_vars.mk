@@ -10,36 +10,42 @@ C_SRCS += \
 ../lcd.c \
 ../main.c \
 ../tm4c123gh6pm_startup_ccs.c \
+../uartConfig.c \
 ../util.c 
 
 OBJS += \
 ./lcd.obj \
 ./main.obj \
 ./tm4c123gh6pm_startup_ccs.obj \
+./uartConfig.obj \
 ./util.obj 
 
 C_DEPS += \
 ./lcd.pp \
 ./main.pp \
 ./tm4c123gh6pm_startup_ccs.pp \
+./uartConfig.pp \
 ./util.pp 
 
 C_DEPS__QUOTED += \
 "lcd.pp" \
 "main.pp" \
 "tm4c123gh6pm_startup_ccs.pp" \
+"uartConfig.pp" \
 "util.pp" 
 
 OBJS__QUOTED += \
 "lcd.obj" \
 "main.obj" \
 "tm4c123gh6pm_startup_ccs.obj" \
+"uartConfig.obj" \
 "util.obj" 
 
 C_SRCS__QUOTED += \
 "../lcd.c" \
 "../main.c" \
 "../tm4c123gh6pm_startup_ccs.c" \
+"../uartConfig.c" \
 "../util.c" 
 
 
