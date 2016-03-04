@@ -17,7 +17,7 @@ int main(void) {
 	timer_waitMillis(1000);
 	lcd_gotoLine(2);
 	lcd_puts("HELLO WORLD");
-
+//a;dlkfj;alkdfj
 	timer_waitMillis(1000);
 	lcd_gotoLine(4);
 	lcd_puts("HELLO WORLD");
