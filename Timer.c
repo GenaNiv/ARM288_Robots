@@ -1,8 +1,7 @@
 /*
  * Timer.cpp
  *
- *  Created on: Mar 3, 2016
- *      Author: ericm
+ *  @author Eric Middleton
  */
 
 #include "Timer.h"
@@ -41,16 +40,21 @@ volatile uint32_t _timer_ticks;
  */
 
 void timer_waitMillis(uint32_t millis) {
-	//Start timer with period of 1ms
+	///Start timer with period of 1ms
 	timer_startTimer(999);
 
+	///loop until enough milliseconds have passed
 	while(millis > 0) {
+		///wait until the millisecond timer has timed out
 		while(!(TIMER0_RIS_R & TIMER_RIS_TATORIS));
 
+		///Reset the timeout flag
 		TIMER0_ICR_R |= TIMER_RIS_TATORIS;
+
 		millis--;
 	}
 
+	///Stop the timer
 	timer_stopTimer();
 }
 
@@ -59,6 +63,7 @@ void timer_waitMicros(uint16_t micros) {
 	timer_startTimer(micros - 1);
 
 	while(!(TIMER0_RIS_R & TIMER_RIS_TATORIS));
+
 	TIMER0_ICR_R |= TIMER_RIS_TATORIS;
 
 	timer_stopTimer();

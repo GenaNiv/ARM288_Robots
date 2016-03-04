@@ -7,20 +7,21 @@
 #include <stdint.h>
 
 int main(void) {
-	//a;lad;sadfgsdfglkajdf;lkajfsd
-	lcd_init();
-	lcd_sendChar('H');
-	lcd_sendChar('E');
-	lcd_sendChar('L');
-	lcd_sendChar('L');
-	lcd_sendChar('O');
-	lcd_sendChar(' ');
-	lcd_sendChar('W');
-	lcd_sendChar('O');
-	lcd_sendChar('R');
-	lcd_sendChar('L');
-	lcd_sendChar('D');
 
+	lcd_init();
+
+	lcd_puts("HELLO WORLD");
+	timer_waitMillis(1000);
+	lcd_gotoLine(1);
+	lcd_sendCommand(0x80 | 0x40);
+	lcd_puts("HELLO WORLD");
+	timer_waitMillis(1000);
+	lcd_gotoLine(2);
+	lcd_puts("HELLO WORLD");
+
+	timer_waitMillis(1000);
+	lcd_gotoLine(3);
+	lcd_puts("HELLO WORLD");
 
 	while(1);
 	return 0;

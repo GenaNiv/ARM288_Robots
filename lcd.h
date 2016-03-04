@@ -13,19 +13,30 @@
 #include <string.h>
 #include <inc/tm4c123gh6pm.h>
 #include "util.h"
+#include "timer.h"
 
-/// Initialize PORT___ to communicate with LCD
+/// Initialize PORTB0:6 to Communicate with LCD
 void lcd_init(void);
 
-///Toggle Enable pin and clear data on port
-void lcd_sendChar(char data);
+///Send Char to LCD
+void lcd_putc(char data);
 
+///Send Character array to LCD
+void lcd_puts(char data[]);
+
+///Send Command to LCD - Position, Clear, Etc.
 void lcd_sendCommand(uint8_t data);
 
 ///Send 4bit nibble to lcd, then clear port.
 void lcd_sendNibble(uint8_t theNibble);
 
 ///Clear LCD Screen
-void lcd_clear(void);
+void inline lcd_clear(void);
+
+///Return Cursor to 0,0
+void inline lcd_home(void);
+
+///Goto Line on LCD - 0 Indexed
+void lcd_gotoLine(uint8_t lineNum);
 
 #endif /* LCD_H_ */
