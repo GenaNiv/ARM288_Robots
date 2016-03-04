@@ -19,7 +19,7 @@ int main(void) {
 	lcd_puts("HELLO WORLD");
 
 	timer_waitMillis(1000);
-	lcd_gotoLine(3);
+	lcd_gotoLine(4);
 	lcd_puts("HELLO WORLD");
 
 	timer_waitMillis(1000);
