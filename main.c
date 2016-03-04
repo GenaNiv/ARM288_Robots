@@ -13,7 +13,6 @@ int main(void) {
 	lcd_puts("HELLO WORLD");
 	timer_waitMillis(1000);
 	lcd_gotoLine(1);
-	lcd_sendCommand(0x80 | 0x40);
 	lcd_puts("HELLO WORLD");
 	timer_waitMillis(1000);
 	lcd_gotoLine(2);
@@ -22,6 +21,8 @@ int main(void) {
 	timer_waitMillis(1000);
 	lcd_gotoLine(3);
 	lcd_puts("HELLO WORLD");
+
+	timer_waitMillis(1000);
 
 	while(1);
 	return 0;

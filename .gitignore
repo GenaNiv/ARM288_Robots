@@ -1,0 +1,6 @@
+# Object Files
+*.o
+*.out
+*.pp
+*.obj
+*.map
