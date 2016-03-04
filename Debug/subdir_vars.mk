@@ -7,6 +7,7 @@ CMD_SRCS += \
 ../tm4c123gh6pm.cmd 
 
 C_SRCS += \
+../Timer.c \
 ../lcd.c \
 ../main.c \
 ../tm4c123gh6pm_startup_ccs.c \
@@ -14,6 +15,7 @@ C_SRCS += \
 ../util.c 
 
 OBJS += \
+./Timer.obj \
 ./lcd.obj \
 ./main.obj \
 ./tm4c123gh6pm_startup_ccs.obj \
@@ -21,6 +23,7 @@ OBJS += \
 ./util.obj 
 
 C_DEPS += \
+./Timer.pp \
 ./lcd.pp \
 ./main.pp \
 ./tm4c123gh6pm_startup_ccs.pp \
@@ -28,6 +31,7 @@ C_DEPS += \
 ./util.pp 
 
 C_DEPS__QUOTED += \
+"Timer.pp" \
 "lcd.pp" \
 "main.pp" \
 "tm4c123gh6pm_startup_ccs.pp" \
@@ -35,6 +39,7 @@ C_DEPS__QUOTED += \
 "util.pp" 
 
 OBJS__QUOTED += \
+"Timer.obj" \
 "lcd.obj" \
 "main.obj" \
 "tm4c123gh6pm_startup_ccs.obj" \
@@ -42,6 +47,7 @@ OBJS__QUOTED += \
 "util.obj" 
 
 C_SRCS__QUOTED += \
+"../Timer.c" \
 "../lcd.c" \
 "../main.c" \
 "../tm4c123gh6pm_startup_ccs.c" \
