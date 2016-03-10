@@ -11,8 +11,8 @@ $(GEN_CMDS__FLAG) \
 "./Timer.obj" \
 "./lcd.obj" \
 "./main.obj" \
+"./open_interface.obj" \
 "./tm4c123gh6pm_startup_ccs.obj" \
-"./uartConfig.obj" \
 "./util.obj" \
 "../tm4c123gh6pm.cmd" \
 -l"libc.a" \
@@ -132,7 +132,7 @@ all: Lab1.out
 Lab1.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: ARM Linker'
-	"c:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.7/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 --abi=eabi -me -g --gcc --define=ccs="ccs" --define=PART_TM4C123GH6PM --diag_wrap=off --display_error_number --diag_warning=225 -z -m"Lab1.map" --heap_size=0 --stack_size=512 -i"c:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.7/lib" -i"c:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.7/include" --reread_libs --display_error_number --diag_wrap=off --warn_sections --xml_link_info="Lab1_linkInfo.xml" --rom_model -o "Lab1.out" $(ORDERED_OBJS)
+	"c:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.7/bin/armcl" -mv7M4 --code_state=16 --float_support=FPv4SPD16 --abi=eabi -me -g --gcc --define=ccs="ccs" --define=PART_TM4C123GH6PM --diag_wrap=off --display_error_number --diag_warning=225 -z -m"Lab1.map" --heap_size=0 --stack_size=1024 -i"c:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.7/lib" -i"c:/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.7/include" --reread_libs --display_error_number --diag_wrap=off --warn_sections --xml_link_info="Lab1_linkInfo.xml" --rom_model -o "Lab1.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -145,8 +145,8 @@ Lab1.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(EXE_OUTPUTS__QUOTED)$(BIN_OUTPUTS__QUOTED)
-	-$(RM) "Timer.pp" "lcd.pp" "main.pp" "tm4c123gh6pm_startup_ccs.pp" "uartConfig.pp" "util.pp" 
-	-$(RM) "Timer.obj" "lcd.obj" "main.obj" "tm4c123gh6pm_startup_ccs.obj" "uartConfig.obj" "util.obj" 
+	-$(RM) "Timer.pp" "lcd.pp" "main.pp" "open_interface.pp" "tm4c123gh6pm_startup_ccs.pp" "util.pp" 
+	-$(RM) "Timer.obj" "lcd.obj" "main.obj" "open_interface.obj" "tm4c123gh6pm_startup_ccs.obj" "util.obj" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

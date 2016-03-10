@@ -5,10 +5,25 @@
 #include "util.h"
 #include "lcd.h"
 #include <stdint.h>
+#include "open_interface.h"
+
 
 int main(void) {
 
+	const char theCat[] = 	"  /\\_/\\ 	\r\n"
+							"=( °w° )=	\r\n"
+							"  )   (  // \r\n"
+							" (__ __)// \r\n\r\n";
 	lcd_init();
+	uart_init();
+
+	while(1)
+	{
+		//uart_sendBuff((uint8_t *)theCat, strlen(theCat));
+		uart_sendChar('A');
+		timer_waitMillis(500);
+	}
+
 
 	lcd_puts("HELLO WORLD");
 	timer_waitMillis(1000);
