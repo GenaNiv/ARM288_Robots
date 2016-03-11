@@ -5,7 +5,17 @@
 #include "util.h"
 #include "lcd.h"
 #include <stdint.h>
-#include "open_interface.h"
+
+
+//Select ther correct header
+#define VERSION1	//Remove to use IRobot Create 2 Platform
+
+#ifdef VERSION1
+	#include "open_interface_v1.h"
+#else
+	#include "open_interface.h"
+#endif
+
 
 
 int main(void) {

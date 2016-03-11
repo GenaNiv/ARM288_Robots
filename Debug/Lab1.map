@@ -1,7 +1,7 @@
 ******************************************************************************
                   TI ARM Linker PC v5.2.7                      
 ******************************************************************************
->> Linked Thu Mar 10 19:39:19 2016
+>> Linked Fri Mar 11 14:55:25 2016
 
 OUTPUT FILE NAME:   <Lab1.out>
 ENTRY POINT SYMBOL: "_c_int00"  address: 00000f41
@@ -39,7 +39,7 @@ section   page    origin      length       input sections
                   00000000    0000026c     tm4c123gh6pm_startup_ccs.obj (.intvecs)
 
 .text      0    0000026c    00000e0e     
-                  0000026c    00000408     open_interface.obj (.text)
+                  0000026c    00000408     open_interface_v1.obj (.text)
                   00000674    000003dc     rtsv7M4_T_le_v4SPD16_eabi.lib : memory.obj (.text)
                   00000a50    000001c0     lcd.obj (.text)
                   00000c10    000000f0     Timer.obj (.text)
