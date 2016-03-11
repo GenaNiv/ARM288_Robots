@@ -2,7 +2,7 @@
  * Open Interface
  *
  *  Created on: Mar 3, 2016
- *      Author: Noah Bergman
+ *      Author: Noah Bergman, Eric Middleton
  */
 #include "open_interface.h"
 
@@ -33,11 +33,12 @@ void oi_init(oi_t *self)
 {
 	oi_uartInit();
 	oi_uartSendChar(OI_OPCODE_START);
-	oi_uartSendChar(OI_OPCODE_BAUD);
 
-	oi_uartSendChar(0x0B);		//Baud code for 115200
-	oi_uartFastMode();			//Set baud to 115200
-	timer_waitMillis(100);
+	//oi_uartSendChar(OI_OPCODE_BAUD);
+	//oi_uartSendChar(0x08);		//Baud code for 28800
+
+	//timer_waitMillis(100);
+	//oi_uartFastMode();			//Set baud to 28800
 
 	oi_uartSendChar(OI_OPCODE_FULL);		//Use full mode, unrestricted control
 	oi_setLeds(1,1,7,255);
@@ -176,7 +177,6 @@ void oi_uartInit(void)
 	uint16_t iBRD = 17;//BRD=SYSCLK/((ClkDiv)(BaudRate)), HSE=0 ClkDiv=16, BaudRate=115,200
 	uint16_t fBRD = 23;//Fractional remainder is 0.6805, DIVFRAC = (.6805)(64)+0.5 = 44
 
-
 	SYSCTL_RCGCGPIO_R |= SYSCTL_RCGCGPIO_R2; //enable GPIO Port C
 
 	SYSCTL_RCGCUART_R |= SYSCTL_RCGCUART_R3; //enable UART3
@@ -202,8 +202,15 @@ void oi_uartInit(void)
 void oi_uartFastMode(void)
 {
 	UART3_CTL_R &= ~(UART_CTL_UARTEN); //Disable UART3 while we mess with it
-	UART3_IBRD_R = 0x08; //BRD=SYSCLK/((ClkDiv)(BaudRate)), HSE=0 ClkDiv=16, BaudRate=115,200
-	UART3_FBRD_R = 0x2C; //Fractional remainder is 0.6805, DIVFRAC = (.6805)(64)+0.5 = 44
+
+//	UART3_IBRD_R = 0x08; //BRD=SYSCLK/((ClkDiv)(BaudRate)), HSE=0 ClkDiv=16, BaudRate=115,200
+//	UART3_FBRD_R = 0x2C; //Fractional remainder is 0.6805, DIVFRAC = (.6805)(64)+0.5 = 44
+
+	//Dividers for baud=28800
+	UART3_IBRD_R = 34;
+	UART3_FBRD_R = 46;
+
+	UART3_CTL_R |= UART_CTL_UARTEN;
 }
 
 ///transmit character
