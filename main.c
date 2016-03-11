@@ -15,13 +15,24 @@ int main(void) {
 							"  )   (  // \r\n"
 							" (__ __)// \r\n\r\n";
 	lcd_init();
-	uart_init();
+
+	oi_t * theRobot = oi_alloc();
+
+	oi_init(theRobot);
 
 	while(1)
 	{
+		oi_update(theRobot);
 		//uart_sendBuff((uint8_t *)theCat, strlen(theCat));
-		uart_sendChar('A');
-		timer_waitMillis(500);
+		//oi_uartSendChar('A');
+		timer_waitMillis(1000);
+
+		oi_setWheels(100, 100);
+
+		timer_waitMillis(1000);
+
+		oi_setWheels(500, 500);
+
 	}
 
 
