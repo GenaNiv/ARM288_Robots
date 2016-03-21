@@ -78,6 +78,14 @@
 #define OI_SENSOR_PACKET_GROUP5 5
 // Contains Packets 7-42
 #define OI_SENSOR_PACKET_GROUP6 6
+// Contains Packets 7-58 For Use With Create 2 Only
+#define OI_SENSOR_PACKET_GROUP100 100
+// Contains Packets 43-58 For Use With Create 2 Only
+#define OI_SENSOR_PACKET_GROUP101 101
+// Contains Packets 46-51 For Use With Create 2 Only
+#define OI_SENSOR_PACKET_GROUP106 106
+// Contains Packets 54-58 For Use With Create 2 Only
+#define OI_SENSOR_PACKET_GROUP107 107
 
 
 
@@ -149,6 +157,38 @@ typedef struct {
 	int16_t requested_radius;
 	int16_t requested_right_velocity;
 	int16_t requested_left_velocity;
+
+
+	//Create 2 Specific Sensors
+	/*
+	 * NOTE: These encoders are square wave, not quadrature, so they rely on the robot’s commanded velocity
+	 * direction to know when to count up/down. So if the robot is trying to drive forward, and you force the
+	 * wheels to spin in reverse, the encoders will count up, (and vice-versa). Additionally, the encoders will
+	 * count up when the commanded velocity is zero and the wheels spin.
+	 * To convert counts to distance, simply do a unit conversion using the equation for circle circumference.
+	 * N counts * (mm in 1 wheel revolution / counts in 1 wheel revolution) = mm
+	 * N counts * (pi * 72.0 / 508.8) = mm
+	 */
+	int16_t left_encoder_counts;
+	int16_t right_encoder_counts;
+	uint8_t light_bumper;
+	uint16_t light_bump_left_signal;
+	uint16_t light_bump_front_left_signal;
+	uint16_t light_bump_center_left_signal;
+	uint16_t light_bump_center_right_signal;
+	uint16_t light_bump_front_right_signal;
+	uint16_t light_bump_right_signal;
+	uint8_t infrared_character_left;
+	uint8_t infrared_character_right;
+	int16_t left_motor_current;
+	int16_t right_motor_current;
+	int16_t main_brush_motor_current;
+	int16_t side_brush_motor_current;
+	uint8_t stasis_castor_sensor;
+
+
+
+
 } oi_t;
 
 

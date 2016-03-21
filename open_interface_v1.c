@@ -4,6 +4,9 @@
  *  Created on: Mar 3, 2016
  *      Author: Noah Bergman, Eric Middleton
  */
+
+#ifdef VERISON1
+
 #include "open_interface_v1.h"
 
 
@@ -255,3 +258,5 @@ void oi_uartSendBuff(const uint8_t theData[], uint8_t theSize)
 		oi_uartSendChar(theData[i]);
 	}
 }
+
+#endif

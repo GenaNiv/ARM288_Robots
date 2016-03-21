@@ -8,7 +8,7 @@
 
 
 //Select ther correct header
-#define VERSION1	1//Remove to use IRobot Create 2 Platform
+#define VERSION1	//Remove to use IRobot Create 2 Platform
 
 #ifdef VERSION1
 	#include "open_interface_v1.h"

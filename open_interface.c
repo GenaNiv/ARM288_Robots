@@ -67,11 +67,13 @@ void oi_update(oi_t *self)
 
 	//Query list of sensors
 	oi_uartSendChar(OI_OPCODE_SENSORS);
-	oi_uartSendChar(OI_SENSOR_PACKET_GROUP6);
+	oi_uartSendChar(OI_SENSOR_PACKET_GROUP100);
+
+	//TODO: For Create2, packet size 80, group 100
 
 	// Read all the sensor data
 	char *sensor = (char *) self;
-	for (i = 0; i < 52; i++) {
+	for (i = 0; i < 80; i++) {
 		// read each sensor byte
 		*(sensor++) = oi_uartReceive();
 	}
@@ -79,24 +81,40 @@ void oi_update(oi_t *self)
 	sensor = (char *) self;
 
 	// Fix byte ordering for multi-byte members of the struct
-	self->distance                 = (sensor[12] << 8) + sensor[13];
-	self->angle                    = (sensor[14] << 8) + sensor[15];
-	self->voltage                  = (sensor[17] << 8) + sensor[18];
-	self->current                  = (sensor[19] << 8) + sensor[20];
-	self->charge                   = (sensor[22] << 8) + sensor[23];
-	self->capacity                 = (sensor[24] << 8) + sensor[25];
-	self->wall_signal              = (sensor[26] << 8) + sensor[27];
-	self->cliff_left_signal        = (sensor[28] << 8) + sensor[29];
-	self->cliff_frontleft_signal   = (sensor[30] << 8) + sensor[31];
-	self->cliff_frontright_signal  = (sensor[32] << 8) + sensor[33];
-	self->cliff_right_signal       = (sensor[34] << 8) + sensor[35];
-	self->cargo_bay_voltage        = (sensor[41] << 8) + sensor[42];
-	self->requested_velocity       = (sensor[48] << 8) + sensor[42];
-	self->requested_radius         = (sensor[50] << 8) + sensor[51];
-	self->requested_right_velocity = (sensor[52] << 8) + sensor[53];
-	self->requested_left_velocity  = (sensor[54] << 8) + sensor[55];
+	self->distance                       = (sensor[12] << 8) + sensor[13];
+		self->angle                          = (sensor[14] << 8) + sensor[15];
+		self->voltage                        = (sensor[17] << 8) + sensor[18];
+		self->current                        = (sensor[19] << 8) + sensor[20];
+		self->charge                         = (sensor[22] << 8) + sensor[23];
+		self->capacity                       = (sensor[24] << 8) + sensor[25];
+		self->wall_signal                    = (sensor[26] << 8) + sensor[27];
+		self->cliff_left_signal              = (sensor[28] << 8) + sensor[29];
+		self->cliff_frontleft_signal         = (sensor[30] << 8) + sensor[31];
+		self->cliff_frontright_signal        = (sensor[32] << 8) + sensor[33];
+		self->cliff_right_signal             = (sensor[34] << 8) + sensor[35];
+		self->cargo_bay_voltage              = (sensor[41] << 8) + sensor[42];
+		self->requested_velocity             = (sensor[48] << 8) + sensor[42];
+		self->requested_radius               = (sensor[50] << 8) + sensor[51];
+		self->requested_right_velocity       = (sensor[52] << 8) + sensor[53];
+		self->requested_left_velocity        = (sensor[54] << 8) + sensor[55];
+		//Icreate2
+		self->left_encoder_counts            = (sensor[56] << 8) + sensor[57];
+		self->right_encoder_counts           = (sensor[58] << 8) + sensor[59];
+		self->light_bump_left_signal         = (sensor[61] << 8) + sensor[62];
+		self->light_bump_front_left_signal   = (sensor[63] << 8) + sensor[64];
+		self->light_bump_center_left_signal  = (sensor[65] << 8) + sensor[66];
+		self->light_bump_center_right_signal = (sensor[67] << 8) + sensor[68];
+		self->light_bump_front_right_signal  = (sensor[69] << 8) + sensor[70];
+		self->light_bump_right_signal        = (sensor[71] << 8) + sensor[72];
+		//left char = 73
+		//right char = 74
+		self->left_motor_current             = (sensor[75] << 8) + sensor[76];
+		self->right_motor_current            = (sensor[77] << 8) + sensor[78];
+		self->main_brush_motor_current       = (sensor[79] << 8) + sensor[80];
+		self->side_brush_motor_current       = (sensor[81] << 8) + sensor[82];
 
-	timer_waitMillis(35); // reduces USART errors that occur when continuously transmitting/receiving
+
+		timer_waitMillis(25); // reduces USART errors that occur when continuously transmitting/receiving min wait time=15ms
 }
 
 /// \brief Set the LEDS on the Create
