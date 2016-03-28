@@ -12,6 +12,7 @@ C_SRCS += \
 ../main.c \
 ../open_interface.c \
 ../open_interface_v1.c \
+../ping.c \
 ../tm4c123gh6pm_startup_ccs.c \
 ../util.c 
 
@@ -21,6 +22,7 @@ OBJS += \
 ./main.obj \
 ./open_interface.obj \
 ./open_interface_v1.obj \
+./ping.obj \
 ./tm4c123gh6pm_startup_ccs.obj \
 ./util.obj 
 
@@ -30,6 +32,7 @@ C_DEPS += \
 ./main.pp \
 ./open_interface.pp \
 ./open_interface_v1.pp \
+./ping.pp \
 ./tm4c123gh6pm_startup_ccs.pp \
 ./util.pp 
 
@@ -39,6 +42,7 @@ C_DEPS__QUOTED += \
 "main.pp" \
 "open_interface.pp" \
 "open_interface_v1.pp" \
+"ping.pp" \
 "tm4c123gh6pm_startup_ccs.pp" \
 "util.pp" 
 
@@ -48,6 +52,7 @@ OBJS__QUOTED += \
 "main.obj" \
 "open_interface.obj" \
 "open_interface_v1.obj" \
+"ping.obj" \
 "tm4c123gh6pm_startup_ccs.obj" \
 "util.obj" 
 
@@ -57,6 +62,7 @@ C_SRCS__QUOTED += \
 "../main.c" \
 "../open_interface.c" \
 "../open_interface_v1.c" \
+"../ping.c" \
 "../tm4c123gh6pm_startup_ccs.c" \
 "../util.c" 
 

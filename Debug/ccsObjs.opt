@@ -1,1 +1,1 @@
-"./Timer.obj" "./lcd.obj" "./main.obj" "./open_interface.obj" "./open_interface_v1.obj" "./tm4c123gh6pm_startup_ccs.obj" "./util.obj" "../tm4c123gh6pm.cmd" -l"libc.a" 
+"./Timer.obj" "./lcd.obj" "./main.obj" "./open_interface.obj" "./open_interface_v1.obj" "./ping.obj" "./tm4c123gh6pm_startup_ccs.obj" "./util.obj" "../tm4c123gh6pm.cmd" -l"libc.a" 
