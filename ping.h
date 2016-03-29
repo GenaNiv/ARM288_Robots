@@ -10,7 +10,9 @@
 
 #include <inc/tm4c123gh6pm.h>
 #include <stdint.h>
+#include <stdbool.h>
 #include "Timer.h"
+#include "driverlib/interrupt.h"
 
 
 
@@ -26,5 +28,6 @@
 void ping_Trigger(void);
 void ping_TimCapInit(void);
 void Enable_IRQ(void);
+void TIMER1B_Handler(void);
 
 #endif /* PING_H_ */

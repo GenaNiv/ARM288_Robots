@@ -6,10 +6,12 @@
  */
 #include "ping.h"
 
+
 volatile uint16_t risingEdge = 0;
 volatile uint16_t fallingEdge = 0;
 volatile uint8_t pingStartFlag = 0;
 volatile uint8_t pingTriggerFlag = 0;
+volatile uint8_t overflows;
 
 void ping_Init()
 {
@@ -23,6 +25,7 @@ void ping_Init()
 	GPIO_PORTF_DATA_R |= 0xFF; //set port F data high
 	timer_waitMicros(5);
 	GPIO_PORTF_DATA_R &= 0xFFFFFF00; //set port F data low
+	overflows = 0; //reset any timeout events
 	pingTriggerFlag = 1; //flag to capture rising edge
 }
 
@@ -57,8 +60,14 @@ void ping_TimCapInit()
 	NVIC_PRI5_R |= 0x00200000; //give priority 1 to interrupt 22(T1CCP1) set bits 23:21 to 1
 	NVIC_EN0_R = 0x00400000; //enable interrupt for IRQ22(T1CCP1) set bit 22 a write of 0 has no effect
 
+	//register ISR
+	IntRegister(INT_TIMER1B, TIMER1B_Handler);
+
 	//intialize global interrupts
 	Enable_IRQ();
+
+	//enable timer1B and start counting
+	TIMER1_CTL_R |= TIMER_CTL_TBEN;
 }
 
 void Enable_IRQ()
@@ -71,13 +80,33 @@ void Enable_IRQ()
 
 void TIMER1B_Handler(void)
 {
-	if(pingTriggerFlag)
+	//check to see if capture event triggered interrupt
+	if(TIMER_MIS_CBMMIS)
+		if(pingTriggerFlag)
+		{
+			TIMER1_ICR_R = TIMER_ICR_CBECINT; //clear capture interrupt flag
+			risingEdge = TIMER1_TBR_R; //captures time of rising edge event
+			pingStartFlag = 1; //flag to indicate pulse has started
+			pingTriggerFlag = 0; //clear flag to capture falling edge
+		}
+		else
+		{
+			TIMER1_ICR_R = TIMER_ICR_CBECINT; //clear capture interrupt flag
+			fallingEdge = TIMER1_TBR_R; //capture time of falling edge
+			pingStartFlag = 0; //ping has ended clear flag
+		}
+	//check to see if timer1B has timed out
+	if(TIMER_MIS_TBTOMIS)
 	{
-		TIMER1_ICR_R = TIMER_ICR_CBECINT; //clear capture interrupt flag
-		risingEdge = TIMER1_TBR_R; //captures time of rising edge event
-		pingStartFlag = 1; //flag to indicate pulse has started
-		pingTriggerFlag = 0; //clear flag to capture falling edge
-
+		TIMER1_ICR_R = TIMER_ICR_TBTOCINT; //clear timeout flag
+		//check if a ping has been sent
+		if(pingStartFlag)
+		{
+			overflows++;
+		}
 	}
+}
+uint32_t getPingDistance()
+{
 
 }
