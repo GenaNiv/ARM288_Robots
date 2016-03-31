@@ -5,6 +5,8 @@
 #include "util.h"
 #include "lcd.h"
 #include <stdint.h>
+#include "ping.h"
+#include "Timer.h"
 
 
 //Select ther correct header
@@ -20,6 +22,9 @@
 
 int main(void) {
 
+
+
+	/*
 	const char theCat[] = 	"  /\\_/\\ 	\r\n"
 							"=( °w° )=	\r\n"
 							"  )   (  // \r\n"
@@ -41,7 +46,7 @@ int main(void) {
 
 		timer_waitMillis(1000);
 
-		oi_setWheels(500, 500);
+		oi_setWheels(500, 500);_
 
 	}
 
@@ -60,7 +65,16 @@ int main(void) {
 	lcd_puts("HELLO WORLD");
 
 	timer_waitMillis(1000);
-
-	while(1);
+	*/
+int counter =0;
+float pingDistance = 0;
+	while(1)
+	{
+		Ping_Init();
+		Ping_TimCapInit();
+		timer_waitMillis(100);
+		pingDistance = Ping_getDistance();
+		timer_waitMillis(10);
+	}
 	return 0;
 }
