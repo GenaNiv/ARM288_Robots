@@ -25,7 +25,7 @@
 #define BIT5		0x20
 #define BIT6		0x40
 #define BIT7		0x80
-#define PING_CONVERSION 0.068
+#define PING_CONVERSION 0.17
 
 void Ping_Init(void);
 void Ping_TimCapInit(void);

@@ -21,15 +21,15 @@ void Ping_Init()
 
 	SYSCTL_RCGCGPIO_R = BIT5; //Turn on PORTF Sys Clk
 
-	GPIO_PORTF_DEN_R &= ~BIT3;
+
 	//Set port to output
-	GPIO_PORTF_DIR_R |= (BIT3 | BIT2); //Pin 3 is T1CCP1 Pin 2 is blue LED
-	GPIO_PORTF_DEN_R |= (BIT3 | BIT2); //Pin 3 Enabled
+	GPIO_PORTF_DIR_R |= (BIT1 | BIT2); //Pin 3 is T1CCP1 Pin 2 is blue LED
+	GPIO_PORTF_DEN_R |= (BIT2 | BIT1); //Pin 3 Enabled
 
 	//Pulse Ping Sensor High to Low with ~ 5us delay
-	GPIO_PORTF_DATA_R |= BIT3; //set port F data high
+	GPIO_PORTF_DATA_R |= BIT1; //set port F data high
 	timer_waitMicros(15);
-	GPIO_PORTF_DATA_R &= ~BIT3; //set port F data low
+	GPIO_PORTF_DATA_R &= ~BIT1; //set port F data low
 	overflows = 0; //reset any timeout events
 	pingTriggerFlag = 1; //flag to capture rising edge
 
@@ -58,7 +58,7 @@ void Ping_TimCapInit()
 	TIMER1_TBMR_R |= (TIMER_TBMR_TBMR_CAP | TIMER_TBMR_TBCDIR | TIMER_TBMR_TBCMR); //set for capture mode, up count
 	TIMER1_CTL_R |= TIMER_CTL_TBEVENT_BOTH; //set bits 11:10 for both edge triggering
 	TIMER1_TBILR_R = 0xFFFF; // set top counter to maximum 16 bit value ~4.1ms @16MHz
-	TIMER1_TBPR_R = 64; //16M/16 = 1us count max = 65.5 ms
+	TIMER1_TBPR_R = 16; //16M/16 = 1us count max = 65.5 ms
 	//clear Timer1B interrupt flags
 	TIMER1_ICR_R = (TIMER_ICR_TBMCINT | TIMER_ICR_CBECINT | TIMER_ICR_CBMCINT | TIMER_ICR_TBTOCINT);
 	TIMER1_IMR_R |= (TIMER_IMR_CBEIM | TIMER_IMR_TBTOIM); //enable Timer1B capture and time-out interrupts
