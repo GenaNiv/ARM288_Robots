@@ -7,6 +7,7 @@
 #include <stdint.h>
 #include "ping.h"
 #include "Timer.h"
+#include "servo.h"
 
 
 //Select ther correct header
@@ -66,6 +67,7 @@ int main(void) {
 
 	timer_waitMillis(1000);
 	*/
+/*
 int counter =0;
 float pingDistance = 0;
 	while(1)
@@ -75,6 +77,16 @@ float pingDistance = 0;
 		timer_waitMillis(100);
 		pingDistance = Ping_getDistance();
 		timer_waitMillis(10);
+	}
+*/
+	Servo_Init();
+	while(1)
+	{
+
+		Servo_Move(0);
+		//Servo_Scan();
+		timer_waitMillis(1000);
+
 	}
 	return 0;
 }

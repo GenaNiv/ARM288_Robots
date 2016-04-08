@@ -39,7 +39,7 @@
 
 #define LCD_WIDTH 20
 #define LCD_HEIGHT 4
-
+#define LCD_TOTAL_CHARS (LCD_WIDTH * LCD_HEIGHT)
 #define LCD_DDRAM_WRITE 0x80
 #define LCD_CGRAM_WRITE 0x40
 
@@ -198,5 +198,67 @@ void lcd_gotoLine(uint8_t lineNum)
 
 }
 
+/// Print a formatted string to the LCD screen
+/**
+ * Mimics the C library function printf for writing to the LCD screen.  The function is buffered; i.e. if you call
+ * lprintf twice with the same string, it will only update the LCD the first time.
+ *
+ * Google "printf" for documentation on the formatter string.
+ *
+ * Code from this site was also used: http://www.ozzu.com/cpp-tutorials/tutorial-writing-custom-printf-wrapper-function-t89166.html
+ * @author Kerrick Staley & Chad Nelson
+ * @date 05/16/2012
+ */
+void lprintf(const char *format, ...) {
+	static char lastbuffer[LCD_TOTAL_CHARS + 1];
 
+	char buffer[LCD_TOTAL_CHARS + 1];
+	va_list arglist;
+	va_start(arglist, format);
+	vsnprintf(buffer, LCD_TOTAL_CHARS + 1, format, arglist);
+
+	if (!strcmp(lastbuffer, buffer))
+		return;
+
+	strcpy(lastbuffer, buffer);
+	lcd_clear();
+	char *str = buffer;
+	int charnum = 0;
+	while (*str && charnum < LCD_TOTAL_CHARS) {
+		if (*str == '\n') {
+			/* fill remainder of line with spaces */
+			charnum += LCD_WIDTH - charnum % LCD_WIDTH;
+		} else {
+			lcd_putc(*str);
+			charnum++;
+		}
+
+		str++;
+
+		/*
+		 * The LCD's lines are not sequential; for future reference, the address are like
+		 * 0x00...0x13 : line 1
+		 * 0x14...0x27 : line 3
+		 * 0x28...0x3F : random junk
+		 * 0x40...0x53 : line 2
+		 * 0x54...0x68 : line 4
+		 *
+		 * The cursor position must be reset at the end of every line, otherwise, after writing line 1, it writes line 3 and then nothingness
+		 */
+
+		if (charnum % LCD_WIDTH == 0) {
+			switch (charnum / LCD_WIDTH) {
+			case 1:
+				lcd_gotoLine(2);
+				break;
+			case 2:
+				lcd_gotoLine(3);
+				break;
+			case 3:
+				lcd_gotoLine(4);
+			}
+		}
+	}
+	va_end(arglist);
+}
 

@@ -16,6 +16,7 @@ ORDERED_OBJS += \
 "./open_interface.obj" \
 "./open_interface_v1.obj" \
 "./ping.obj" \
+"./servo.obj" \
 "./tm4c123gh6pm_startup_ccs.obj" \
 "./util.obj" \
 "../tm4c123gh6pm.cmd" \
@@ -157,8 +158,8 @@ Lab1.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(EXE_OUTPUTS__QUOTED)$(BIN_OUTPUTS__QUOTED)
-	-$(RM) "Timer.pp" "lcd.pp" "main.pp" "open_interface.pp" "open_interface_v1.pp" "ping.pp" "tm4c123gh6pm_startup_ccs.pp" "util.pp" 
-	-$(RM) "Timer.obj" "lcd.obj" "main.obj" "open_interface.obj" "open_interface_v1.obj" "ping.obj" "tm4c123gh6pm_startup_ccs.obj" "util.obj" 
+	-$(RM) "Timer.pp" "lcd.pp" "main.pp" "open_interface.pp" "open_interface_v1.pp" "ping.pp" "servo.pp" "tm4c123gh6pm_startup_ccs.pp" "util.pp" 
+	-$(RM) "Timer.obj" "lcd.obj" "main.obj" "open_interface.obj" "open_interface_v1.obj" "ping.obj" "servo.obj" "tm4c123gh6pm_startup_ccs.obj" "util.obj" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

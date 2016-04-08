@@ -39,4 +39,6 @@ void inline lcd_home(void);
 ///Goto Line on LCD - 0 Indexed
 void lcd_gotoLine(uint8_t lineNum);
 
+void lprintf(const char *format, ...);
+
 #endif /* LCD_H_ */
