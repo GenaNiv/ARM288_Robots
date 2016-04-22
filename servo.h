@@ -13,9 +13,9 @@
 #ifndef SERVO_H_
 #define SERVO_H_
 
-#define PERIOD 320000 //44000 = (16M*20ms)/8
-#define ZERO_DEGREE 16000 //(16M*1ms)/8 = 2000
-
+#define PERIOD 320000L //44000 = (16M*20ms)
+#define ZERO_DEGREE 8500 // = Fcpu * 1ms
+#define MAX_DEGREE 32000 //  = Fcpu * 2ms
 
 #define BIT0		0x01
 #define BIT1		0x02
@@ -29,5 +29,7 @@
 void Servo_Init(void);
 void Servo_Scan(void);
 void Servo_Move(uint8_t degrees);
+
+void Servo_Test();
 
 #endif /* SERVO_H_ */

@@ -8,37 +8,6 @@
 
 volatile uint32_t _timer_ticks;
 
-/*
- * Used for reference -- Delete eventually
-#define TIMER0_CFG_R            (*((volatile uint32_t *)0x40030000))
-#define TIMER0_TAMR_R           (*((volatile uint32_t *)0x40030004))
-#define TIMER0_TBMR_R           (*((volatile uint32_t *)0x40030008))
-#define TIMER0_CTL_R            (*((volatile uint32_t *)0x4003000C))
-#define TIMER0_SYNC_R           (*((volatile uint32_t *)0x40030010))
-#define TIMER0_IMR_R            (*((volatile uint32_t *)0x40030018))
-#define TIMER0_RIS_R            (*((volatile uint32_t *)0x4003001C))
-#define TIMER0_MIS_R            (*((volatile uint32_t *)0x40030020))
-#define TIMER0_ICR_R            (*((volatile uint32_t *)0x40030024))
-#define TIMER0_TAILR_R          (*((volatile uint32_t *)0x40030028))
-#define TIMER0_TBILR_R          (*((volatile uint32_t *)0x4003002C))
-#define TIMER0_TAMATCHR_R       (*((volatile uint32_t *)0x40030030))
-#define TIMER0_TBMATCHR_R       (*((volatile uint32_t *)0x40030034))
-#define TIMER0_TAPR_R           (*((volatile uint32_t *)0x40030038))
-#define TIMER0_TBPR_R           (*((volatile uint32_t *)0x4003003C))
-#define TIMER0_TAPMR_R          (*((volatile uint32_t *)0x40030040))
-#define TIMER0_TBPMR_R          (*((volatile uint32_t *)0x40030044))
-#define TIMER0_TAR_R            (*((volatile uint32_t *)0x40030048))
-#define TIMER0_TBR_R            (*((volatile uint32_t *)0x4003004C))
-#define TIMER0_TAV_R            (*((volatile uint32_t *)0x40030050))
-#define TIMER0_TBV_R            (*((volatile uint32_t *)0x40030054))
-#define TIMER0_RTCPD_R          (*((volatile uint32_t *)0x40030058))
-#define TIMER0_TAPS_R           (*((volatile uint32_t *)0x4003005C))
-#define TIMER0_TBPS_R           (*((volatile uint32_t *)0x40030060))
-#define TIMER0_TAPV_R           (*((volatile uint32_t *)0x40030064))
-#define TIMER0_TBPV_R           (*((volatile uint32_t *)0x40030068))
-#define TIMER0_PP_R             (*((volatile uint32_t *)0x40030FC0))
- */
-
 void timer_waitMillis(uint32_t millis) {
 	///Start timer with period of 1ms
 	timer_startTimer(999);
@@ -90,7 +59,7 @@ void timer_startTimer(uint16_t startValue) {
 	TIMER0_ICR_R = TIMER_ICR_TATOCINT;
 
 	//Enable Timer0A time out interrupt
-	TIMER0_IMR_R = TIMER_IMR_TATOIM;
+	//TIMER0_IMR_R = TIMER_IMR_TATOIM;
 
 	//Set the prescaler to 16 (period = 1us)
 	TIMER0_TAPR_R = 16;

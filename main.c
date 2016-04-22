@@ -22,71 +22,23 @@
 
 
 int main(void) {
+	//lcd_init();
 
-
-
-	/*
-	const char theCat[] = 	"  /\\_/\\ 	\r\n"
-							"=( °w° )=	\r\n"
-							"  )   (  // \r\n"
-							" (__ __)// \r\n\r\n";
-	lcd_init();
-
-	oi_t * theRobot = oi_alloc();
-
-	oi_init(theRobot);
-
-	while(1)
-	{
-		oi_update(theRobot);
-		//uart_sendBuff((uint8_t *)theCat, strlen(theCat));
-		//oi_uartSendChar('A');
-		timer_waitMillis(1000);
-
-		oi_setWheels(100, 100);
-
-		timer_waitMillis(1000);
-
-		oi_setWheels(500, 500);_
-
-	}
-
-
-	lcd_puts("HELLO WORLD");
-	timer_waitMillis(1000);
-	lcd_gotoLine(1);
-	lcd_puts("HELLO WORLD");
-	timer_waitMillis(1000);
-	lcd_gotoLine(2);
-	lcd_puts("HELLO WORLD");
-//a;dlkfj;alkdfj
-	//Git Ignore Test
-	timer_waitMillis(1000);
-	lcd_gotoLine(4);
-	lcd_puts("HELLO WORLD");
-
-	timer_waitMillis(1000);
-	*/
+//	oi_t * theRobot = oi_alloc();
+//	oi_init(theRobot);
 /*
-int counter =0;
-float pingDistance = 0;
-	while(1)
-	{
-		Ping_Init();
-		Ping_TimCapInit();
-		timer_waitMillis(100);
-		pingDistance = Ping_getDistance();
-		timer_waitMillis(10);
+	SYSCTL_RCGCGPIO_R |= BIT5; //turn on clk to PORTF
+	GPIO_PORTF_AFSEL_R = 0;
+	GPIO_PORTF_PCTL_R = 0;
+	GPIO_PORTF_DIR_R |= BIT1; //set for output
+	GPIO_PORTF_DEN_R |= BIT1;
+
+	while(1) {
+		GPIO_PORTF_DATA_R ^= BIT1;
+		timer_waitMillis(1000);
 	}
 */
-	Servo_Init();
-	while(1)
-	{
+	Servo_Test();
 
-		Servo_Move(0);
-		//Servo_Scan();
-		timer_waitMillis(1000);
-
-	}
 	return 0;
 }
